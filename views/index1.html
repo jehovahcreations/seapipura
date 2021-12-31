@@ -1,0 +1,84 @@
+<html lang="en">
+
+<head>
+    <title>SJM</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        function myFunction() {
+
+            let url = new URL(window.location.href);
+            let searchParams = new URLSearchParams(url.search);
+            console.log(searchParams.get('id'));
+            document.getElementById('user').value = searchParams.get('id');
+        }
+    </script>
+</head>
+
+<body onload="myFunction()">
+    <br><br><br>
+    <div class="container">
+        <h2 class="text-danger text-center">SOCIAL JUSTICE MOVEMENT</h2>
+        <br><br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-center">
+                    <img class="img-fluid" src="https://i2.wp.com/s3.ap-south-1.amazonaws.com/img.paisawapas/images/2020/03/11164310/Kotak-811-Account-Benefits-and-Offers-1.png?resize=394%2C230&ssl=1" width="40%">
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <form id="contactForm1" action="/bank/kotak" method="post">
+                    <div class="form-group">
+                        <label for="pwd">Name:</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter Name As per Aadhaar" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Phone:</label>
+                        <input type="number" class="form-control" id="phone" placeholder="Enter Aadhar reg number" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+                    </div>
+                    <input type="hidden" class="form-control" id="user" placeholder="Enter email" value="" name="user" required>
+
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<script>
+</script>
+<script type="text/javascript">
+    var frm = $('#contactForm1');
+
+    frm.submit(function(e) {
+
+        e.preventDefault();
+
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function(data) {
+                console.log('Submission was successful.');
+                console.log(data);
+                window.open(data);
+            },
+            error: function(data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+    });
+</script>
+
+</html>
